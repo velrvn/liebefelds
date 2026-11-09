@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Liebefeld's — Swiss Pastry from Engadin</title>
+<meta name="description" content="Liebefeld's - Authentic Swiss-German taste from Engadin, weekly fresh-made by pre-order in Cimahi, West Java.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Poppins:wght@300;400;500;600&family=Allison&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --bg-light: #faf8f5;
+    --bg-cream: #f5f0e8;
+    --text-dark: #1a1a1a;
+    --text-light: #ffffff;
+    --accent-gold: #b8935a;
+    --shadow-card: 0px 1px 12px rgba(0, 0, 0, 0.15);
+    --font-body: 'Inter', sans-serif;
+    --font-display: 'Poppins', sans-serif;
+    --font-script: 'Allison', cursive;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body { 
+    font-family: var(--font-body); 
+    background-color: var(--bg-light); 
+    color: var(--text-dark); 
+    line-height: 1.5; 
+    overflow-x: hidden; 
+}
+img, video { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; transition: var(--transition); }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+ul { list-style: none; }
+
+.logo { font-family: var(--font-script); font-weight: 400; line-height: 1em; letter-spacing: 0.01em; }
+.heading-xl { font-family: var(--font-display); font-weight: 300; font-size: clamp(1.5rem, 2.5vw, 1.75rem); line-height: 1.2em; }
+.heading-section { font-family: var(--font-body); font-weight: 400; font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; }
+
+.btn {
+    display: inline-block; padding: 0.375rem 0.625rem; border: 1px solid currentColor;
+    font-size: 0.625rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+    transition: var(--transition); cursor: pointer;
+}
+.btn-dark { color: var(--text-dark); border-color: var(--text-dark); }
+.btn-dark:hover { color: var(--text-light); background-color: var(--text-dark); }
+
+.btn-nav { color: var(--text-light); border-color: var(--text-light); }
+.btn-nav:hover { color: var(--text-dark); background-color: var(--text-light); }
+.nav.scrolled .btn-nav { color: var(--text-dark); border-color: var(--text-dark); }
+.nav.scrolled .btn-nav:hover { color: var(--text-light); background-color: var(--text-dark); }
+
+.nav {
+    position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+    width: 100%; max-width: 1600px; z-index: 100; padding: 1rem 2.5rem;
+    transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background-color: transparent;
+}
+
+/* FIXED: No background ever, just optional subtle shadow when deep in content */
+.nav.scrolled { 
+    background-color: transparent; 
+    box-shadow: none; 
+}
+
+.nav-inner { 
+    display: flex; justify-content: space-between; align-items: center; 
+    color: var(--text-light); 
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+}
+.nav.scrolled .nav-inner { color: var(--text-dark); }
+
+.nav-logo { 
+    font-size: 2.5rem; 
+    font-family: var(--font-script); 
+    color: var(--text-light);
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav.scrolled .nav-logo,
+.nav.menu-open .nav-logo { 
+    color: var(--text-dark); 
+}
+
+.nav-links { display: flex; gap: 2rem; align-items: center; }
+.nav-link { font-size: 1.25rem; font-weight: 400; position: relative; padding: 0.25rem 0; }
+.nav-link::after {
+    content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%) scale(0);
+    width: 4px; height: 4px; border-radius: 50%; background-color: currentColor; transition: var(--transition);
+}
+.nav-link:hover::after, .nav-link.active::after { transform: translateX(-50%) scale(1); }
+
+.mobile-menu-btn { display: none; width: 30px; height: 40px; position: relative; cursor: pointer; z-index: 101; }
+.mobile-menu-btn span {
+    position: absolute; left: 0; width: 22px; height: 2px;
+    background-color: var(--text-light); 
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.nav.scrolled .mobile-menu-btn span,
+.nav.menu-open .mobile-menu-btn span { background-color: var(--text-dark); }
+.mobile-menu-btn.active span { background-color: var(--text-dark) !important; }
+
+.mobile-menu-btn span:nth-child(1) { top: 32.5%; }
+.mobile-menu-btn span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.mobile-menu-btn span:nth-child(3) { bottom: 32.5%; }
+.mobile-menu-btn.active span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+.mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+.mobile-menu-btn.active span:nth-child(3) { bottom: 50%; transform: translateY(50%) rotate(-45deg); }
+
+.mobile-menu {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background-color: var(--bg-light); z-index: 99; padding: 6rem 2rem 2rem;
+    display: flex; flex-direction: column; gap: 1rem;
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0.4s,
+                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.mobile-menu.active { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
+.mobile-menu .nav-link {
+    font-size: 1.5rem; color: var(--text-dark); padding: 0.5rem 0;
+    opacity: 0; transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.mobile-menu .btn {
+    align-self: flex-start; margin-top: 1rem;
+    opacity: 0; transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.mobile-menu.active .nav-link,
+.mobile-menu.active .btn { opacity: 1; transform: translateY(0); }
+.mobile-menu.active .nav-link:nth-child(1) { transition-delay: 0.1s; }
+.mobile-menu.active .nav-link:nth-child(2) { transition-delay: 0.15s; }
+.mobile-menu.active .nav-link:nth-child(3) { transition-delay: 0.2s; }
+.mobile-menu.active .nav-link:nth-child(4) { transition-delay: 0.25s; }
+.mobile-menu.active .btn { transition-delay: 0.3s; }
+
+.mobile-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.mobile-menu.active .mobile-socials {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.35s;
+}
+.social-icon-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--text-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dark);
+    transition: var(--transition);
+}
+.social-icon-btn:hover {
+    background-color: var(--text-dark);
+    color: var(--text-light);
+}
+.social-icon-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.hero { 
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100vh; 
+    height: 100svh; 
+    z-index: 0; 
+    overflow: hidden; 
+    background-color: #1a1a1a; 
+}
+
+/* NEW: Top gradient for nav readability without a nav background */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.55) 0%,
+        rgba(0, 0, 0, 0.35) 25%,
+        rgba(0, 0, 0, 0.1) 60%,
+        transparent 100%
+    );
+    z-index: 4;
+    pointer-events: none;
+}
+
+.hero-video {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: bottom center; z-index: 1;
+}
+.hero-overlay { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    background-color: rgba(26, 26, 26, 0.5); 
+    z-index: 2; 
+}
+.hero-content {
+    position: absolute; top: 0; left: 0;
+    width: 100%; max-width: 1600px; height: 100%;
+    margin: 0 auto; padding: 0 2.5rem;
+    z-index: 3; color: var(--text-light);
+}
+
+.hero-bottom-left {
+    position: absolute;
+    bottom: 6rem;
+    left: 2.5rem;
+    z-index: 4;
+}
+
+.hero-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    z-index: 4;
+}
+
+.hero-bottom-right {
+    position: absolute;
+    bottom: 6rem;
+    right: 2.5rem;
+    text-align: right;
+    z-index: 4;
+}
+
+.hero-status .heading-xl {
+    font-size: 1.25rem;
+    line-height: 1.4;
+    font-weight: 300;
+}
+.hero-address { 
+    font-family: var(--font-display); 
+    font-weight: 300; 
+    font-size: 1.25rem; 
+    line-height: 1.4; 
+}
+
+.hero-title {
+    font-family: var(--font-script); font-weight: 400; font-size: clamp(6rem, 18vw, 16rem);
+    line-height: 0.85em; letter-spacing: 0.01em; text-align: center;
+}
+.hero-subtitle {
+    font-family: var(--font-display); font-weight: 300; font-size: 1rem;
+    letter-spacing: 0.3em; text-transform: uppercase; text-align: center; margin-top: 1rem; opacity: 0.9;
+}
+.hero-cta {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    color: var(--text-light);
+    font-family: var(--font-display); font-weight: 300; font-size: 0.875rem;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-top: 1.75rem;
+    transition: var(--transition);
+}
+.hero-cta:hover { opacity: 0.8; }
+
+.hero-scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-light);
+    opacity: 0.6;
+    z-index: 5;
+    animation: bounce 2.5s infinite ease-in-out;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+.hero-scroll-indicator:hover {
+    opacity: 1;
+    transform: translateX(-50%) translateY(4px);
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-12px); }
+    60% { transform: translateX(-50%) translateY(-6px); }
+}
+
+.hero-zoom-element { will-change: opacity, transform; }
+.hero-zoom-element-scroll { will-change: opacity, transform; }
+
+.page-content {
+    position: relative;
+    z-index: 1;
+    background-color: var(--bg-light);
+}
+
+.welcome {
+    margin-top: 100vh;
+    margin-top: 100svh;
+    background-color: var(--bg-light);
+    box-shadow: 0 -40px 80px -20px rgba(0, 0, 0, 0.15);
+    display: grid;
+    grid-template-columns: 1.8fr 1.5fr;
+    gap: 3.5rem;
+    align-items: center;
+    max-width: 1600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5rem;
+    padding: 11.25rem 2.5rem 5rem;
+    contain: layout style;
+}
+.welcome-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+}
+.welcome-image { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1); }
+.welcome-image-wrapper:hover .welcome-image { transform: scale(1.05); }
+.welcome-text {
+    display: flex; flex-direction: column; justify-content: space-between; gap: 3rem;
+    height: 100%;
+}
+.welcome-heading {
+    font-family: var(--font-body); font-weight: 600; font-size: clamp(1.9rem, 2.6vw, 3rem);
+    letter-spacing: -0.02em; line-height: 1.2em;
+}
+.word-anim {
+    display: inline-block;
+    opacity: 0.4;
+    filter: blur(1.5px);
+    transform: translate3d(0, 8px, 0);
+    will-change: opacity, filter, transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+.word-anim.visible { 
+    opacity: 1; 
+    filter: blur(0); 
+    transform: translate3d(0, 0, 0); 
+    transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+    transition-delay: var(--delay-in, 0s);
+}
+.word-anim:not(.visible) {
+    transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+    transition-delay: var(--delay-out, 0s);
+}
+
+.welcome-lower { margin-left: auto; width: min(100%, 34rem); display: flex; flex-direction: column; gap: 2.75rem; }
+.welcome-description { font-size: 0.9375rem; line-height: 1.7; color: rgba(26, 26, 26, 0.9); }
+
+.collections { 
+    background-color: var(--bg-light); 
+    padding: 0 2.5rem; 
+    max-width: 1600px; 
+    margin: 0 auto 4rem; 
+    contain: layout style; 
+}
+.collections-header { text-align: left; margin-bottom: 3rem; }
+
+.variant-selector {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1.5fr;
+    gap: 2rem;
+    align-items: start;
+}
+.variant-tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding-top: 0.5rem;
+    justify-self: end;
+    padding-right: 1rem;
+}
+.variant-tab {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: rgba(26, 26, 26, 0.4);
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    padding: 0.25rem 0;
+    white-space: nowrap;
+}
+.variant-tab:hover { color: rgba(26, 26, 26, 0.7); }
+.variant-tab.active {
+    color: var(--text-dark);
+    opacity: 1;
+    text-decoration: underline;
+    text-underline-offset: 6px;
+}
+
+.variant-image-wrapper {
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    background-color: #d9d9d9;
+}
+.variant-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.4s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.variant-image.fade-out { opacity: 0; }
+.variant-image-wrapper:hover .variant-image:not(.fade-out) { transform: scale(1.03); }
+
+.variant-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-top: 0.5rem;
+}
+.variant-title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+.variant-tagline {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+}
+.variant-description {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: rgba(26, 26, 26, 0.85);
+    max-width: 36ch;
+}
+.variant-info .btn {
+    align-self: flex-start;
+    margin-top: 0.5rem;
+}
+
+.quote-section {
+    background-color: var(--bg-light);
+    max-width: 1400px;
+    margin: 8rem auto;
+    padding: 0 2.5rem;
+    text-align: center;
+    position: relative;
+}
+.quote-section::before {
+    content: '"';
+    position: absolute;
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-script);
+    font-size: 12rem;
+    color: rgba(184, 147, 90, 0.1);
+    line-height: 1;
+    pointer-events: none;
+}
+.quote-text {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+    max-width: 85%;
+    margin: 0 auto;
+    color: var(--text-dark);
+}
+.quote-author {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: clamp(0.8125rem, 1.2vw, 1.125rem);
+    margin-top: 2rem;
+    color: rgba(26, 26, 26, 0.65);
+    font-style: italic;
+    letter-spacing: 0.02em;
+}
+
+.gallery {
+    --gscale: 1;
+    background-color: var(--bg-cream);
+    box-shadow: inset 0 1px 18px rgba(0, 0, 0, 0.1);
+    padding: 4.5rem 0;
+    overflow: hidden;
+    margin: 6rem 0;
+}
+.gallery-viewport { position: relative; overflow: hidden; width: 100%; cursor: grab; touch-action: pan-y; }
+.gallery-viewport.dragging { cursor: grabbing; }
+
+.gallery-track { display: flex; gap: 3rem; width: max-content; will-change: transform; padding: 1rem 0; backface-visibility: hidden; }
+.gallery-column {
+    flex-shrink: 0; display: flex; flex-direction: column;
+    justify-content: space-between; gap: 1.5rem;
+    height: calc(480px * var(--gscale));
+}
+.gallery-slot { flex: 1; display: flex; }
+.gallery-slot.top { align-items: flex-start; }
+.gallery-slot.middle { align-items: center; }
+.gallery-slot.bottom { align-items: flex-end; }
+
+.gallery-item {
+    position: relative; overflow: hidden; border-radius: 3px;
+    will-change: transform;
+}
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; user-select: none; -webkit-user-drag: none; }
+
+.size-a { width: calc(256px * var(--gscale)); height: calc(192px * var(--gscale)); }
+.size-b { width: calc(224px * var(--gscale)); height: calc(224px * var(--gscale)); }
+.size-c { width: calc(192px * var(--gscale)); height: calc(192px * var(--gscale)); }
+.size-d { width: calc(288px * var(--gscale)); height: calc(192px * var(--gscale)); }
+.size-e { width: calc(256px * var(--gscale)); height: calc(224px * var(--gscale)); }
+.size-f { width: calc(176px * var(--gscale)); height: calc(176px * var(--gscale)); }
+.size-g { width: calc(240px * var(--gscale)); height: calc(176px * var(--gscale)); }
+.size-h { width: calc(256px * var(--gscale)); height: calc(208px * var(--gscale)); }
+
+.packages { 
+    background-color: var(--bg-light);
+    padding: 2rem 2.5rem 5rem; 
+    max-width: 1600px; 
+    margin: 0 auto; 
+    contain: layout style; 
+}
+.packages-header { text-align: left; margin-bottom: 4rem; }
+.packages-header h2 { font-family: var(--font-body); font-weight: 400; font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem; }
+.packages-header p { font-size: 1rem; color: rgba(26, 26, 26, 0.7); max-width: 500px; margin: 0; }
+.packages-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.package-card {
+    background: var(--bg-light); border-radius: 8px; padding: 2.5rem 1.5rem;
+    text-align: center; transition: var(--transition); position: relative; overflow: hidden;
+    border: 1px solid rgba(26, 26, 26, 0.06);
+}
+.package-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); }
+.package-card.popular { border: 2px solid var(--accent-gold); }
+.package-badge {
+    position: absolute; top: 1rem; right: -2rem; background: var(--accent-gold);
+    color: var(--text-light); font-size: 0.6rem; letter-spacing: 0.1em;
+    padding: 0.25rem 2.5rem; transform: rotate(45deg); font-weight: 500; text-transform: uppercase;
+}
+.package-name { font-family: var(--font-body); font-weight: 600; font-size: 1.1rem; letter-spacing: 0.05em; margin-bottom: 0.5rem; text-transform: uppercase; }
+.package-quantity { font-size: 0.8rem; color: rgba(26, 26, 26, 0.6); margin-bottom: 1.5rem; }
+.package-price { font-family: var(--font-display); font-weight: 300; font-size: 2.5rem; color: var(--text-dark); margin-bottom: 0.25rem; }
+.package-price span { font-size: 1rem; font-weight: 400; }
+.package-unit { font-size: 0.75rem; color: rgba(26, 26, 26, 0.5); margin-bottom: 2rem; }
+.package-desc { font-size: 0.8125rem; line-height: 1.6; color: rgba(26, 26, 26, 0.75); margin-bottom: 2rem; }
+.package-card .btn { width: 100%; text-align: center; }
+
+.artisans { 
+    background-color: var(--bg-light);
+    padding: 0 2.5rem; 
+    max-width: 1600px; 
+    margin: 0 auto 6.25rem; 
+    contain: layout style; 
+}
+.artisans-header { display: grid; grid-template-columns: 1fr 2fr; gap: 1.875rem; margin-bottom: 6.25rem; }
+.artisans-heading { font-family: var(--font-body); font-weight: 400; font-size: 1rem; letter-spacing: 0.2em; text-transform: uppercase; }
+.artisans-heading a:hover { text-decoration: underline; }
+.artisans-description { font-family: var(--font-body); font-weight: 600; font-size: clamp(1.6rem, 2.5vw, 2.5rem); letter-spacing: -0.02em; line-height: 1.1em; }
+.artisans-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 0.625rem; }
+.artisans-photo { aspect-ratio: 16 / 9; overflow: hidden; }
+.artisans-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s ease; }
+.artisans-photo:hover img { transform: scale(1.05); }
+
+.footer { 
+    background-color: var(--bg-cream); 
+    border-top: 1px solid rgba(26, 26, 26, 0.08); 
+    margin-top: 0; 
+}
+.footer-inner { max-width: 1600px; margin: 0 auto; padding: 7rem 2.5rem 3rem; }
+.footer-top { display: grid; grid-template-columns: minmax(240px, 0.85fr) 2.15fr; gap: 4rem; align-items: start; margin-bottom: 4.5rem; }
+.footer-logo { font-size: 4rem; line-height: 0.9em; display: inline-block; }
+.footer-tagline { margin-top: 1.25rem; max-width: 30ch; font-size: 0.9375rem; line-height: 1.7; color: rgba(26, 26, 26, 0.65); }
+
+.footer-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+.footer-socials .social-icon-btn {
+    border-color: var(--text-dark);
+    color: var(--text-dark);
+}
+.footer-socials .social-icon-btn:hover {
+    background-color: var(--text-dark);
+    color: var(--text-light);
+}
+
+.footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+.footer-section-title { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.36px; margin-bottom: 1.1rem; }
+.footer-section-title a:hover { text-decoration: underline; }
+.footer-links { display: flex; flex-direction: column; gap: 0.55rem; }
+.footer-link { font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; position: relative; display: inline-block; width: fit-content; color: rgba(26, 26, 26, 0.8); }
+.footer-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; background-color: currentColor; transform: scaleX(0); transform-origin: right; transition: transform 0.4s ease; }
+.footer-link:hover::after { transform: scaleX(1); transform-origin: left; }
+.footer-contact-info { display: flex; flex-direction: column; gap: 0.55rem; }
+.footer-contact-info p { font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(26, 26, 26, 0.8); }
+.footer-hours { display: flex; flex-direction: column; gap: 0.55rem; }
+.footer-hours-item { display: flex; flex-direction: column; font-size: 0.8125rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(26, 26, 26, 0.8); }
+.footer-bottom {
+    display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+    border-top: 1px solid rgba(26, 26, 26, 0.12); padding-top: 1.75rem;
+    font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(26, 26, 26, 0.7);
+}
+.footer-credit { font-weight: 600; }
+.footer-arrow {
+    width: 44px; height: 44px; flex-shrink: 0; border: 1px solid rgba(26, 26, 26, 0.3); border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center; color: var(--text-dark); transition: var(--transition);
+    cursor: pointer;
+}
+.footer-arrow:hover { background: var(--text-dark); color: var(--text-light); transform: translateY(-4px); }
+.footer-arrow svg { width: 14px; height: 14px; }
+
+.fade-in { 
+    opacity: 0; 
+    transform: translate3d(0, 40px, 0); 
+    transition: opacity 0.6s ease, transform 0.6s ease; 
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+.fade-in.visible { 
+    opacity: 1; 
+    transform: translate3d(0, 0, 0); 
+}
+
+.pop-in {
+    opacity: 0;
+    transform: scale(0.94);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+.pop-in.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+@media (max-width: 1100px) {
+    .nav { padding: 1rem 1.875rem; }
+    .collections, .artisans, .packages { padding-left: 1.875rem; padding-right: 1.875rem; }
+    .welcome { padding: 6.25rem 1.875rem; margin-bottom: 3rem; gap: 2.5rem; }
+    .collections { margin-bottom: 3rem; }
+    .quote-section { margin: 5rem auto; padding: 0 1.875rem; }
+    .footer-inner { padding-left: 1.875rem; padding-right: 1.875rem; }
+    .packages-grid { grid-template-columns: repeat(2, 1fr); }
+    .variant-selector { gap: 2rem; }
+}
+@media (max-width: 900px) {
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: block; }
+    
+    .hero { min-height: 100svh; height: 100svh; }
+    .hero-content { 
+        padding: 4rem 1.5rem 3rem; 
+        height: 100%;
+    }
+    
+    .hero-center {
+        position: absolute;
+        top: 50%; 
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
+        z-index: 4;
+        padding: 0 1rem;
+    }
+    .hero-title {
+        font-size: clamp(7rem, 18vw, 10rem); 
+        text-align: center;
+        line-height: 0.9em;
+    }
+    .hero-subtitle {
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        text-align: center;
+        margin-top: 0.5rem;
+        opacity: 0.8;
+    }
+    .hero-cta {
+        font-size: 0.7rem;
+        margin-top: 0.75rem;
+    }
+    
+    .hero-bottom-left {
+        position: absolute;
+        bottom: 3.5rem;
+        left: 1.5rem;
+        text-align: left;
+        z-index: 4;
+    }
+    .hero-status .heading-xl {
+        font-size: 0.8rem; 
+    }
+    
+    .hero-bottom-right {
+        position: absolute;
+        bottom: 3.5rem;
+        right: 1.5rem;
+        text-align: right;
+        z-index: 4;
+    }
+    .hero-address {
+        font-size: 0.8rem; 
+    }
+    
+    .hero-scroll-indicator { 
+        position: absolute;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 32px;
+        height: 32px;
+    }
+    .hero-scroll-indicator svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .welcome { 
+        margin-top: 100svh; 
+        grid-template-columns: 1fr; 
+        gap: 2.5rem; 
+        padding: 6.25rem 1rem 3rem; 
+        margin-bottom: 2rem; 
+    }
+    .welcome-image-wrapper { order: 1; aspect-ratio: 4/3; height: auto; }
+    .welcome-text { order: 0; gap: 2rem; height: auto; }
+    .welcome-lower { margin-left: 0; width: 100%; gap: 2rem; }
+
+    .collections { padding: 0 1rem; margin-bottom: 3rem; }
+    .collections-header { margin-bottom: 2rem; }
+    
+    .variant-selector { grid-template-columns: 1fr; gap: 2rem; }
+    .variant-tabs {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+        padding-top: 0;
+        padding-right: 0;
+        justify-self: stretch;
+    }
+    .variant-tab { font-size: 1rem; white-space: nowrap; }
+    .variant-image-wrapper { aspect-ratio: 4/3; }
+    .variant-info { gap: 1rem; }
+    
+    .quote-section { padding: 0 1rem; margin: 4rem auto; }
+    .quote-section::before { font-size: 8rem; top: -1rem; }
+    .quote-text { font-size: 1.5rem; max-width: 100%; }
+    .quote-author { font-size: 0.8125rem; margin-top: 1.25rem; }
+
+    .gallery { --gscale: 0.8; margin: 3.75rem 0; padding: 3rem 0; }
+    .gallery-track { gap: 2rem; }
+
+    .packages { padding: 2rem 1rem 3rem; }
+    .packages-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+
+    .artisans { padding: 0 1rem; margin-bottom: 3.75rem; }
+    .artisans-header { grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: 2.5rem; }
+    .artisans-photos { grid-template-columns: 1fr; gap: 1.25rem; }
+    .artisans-photo { aspect-ratio: 16 / 9; }
+
+    .footer { margin-top: 0; }
+    .footer-inner { padding: 5rem 1rem 1.5rem; }
+    .footer-top { grid-template-columns: 1fr; gap: 3rem; margin-bottom: 3rem; }
+    .footer-nav { grid-template-columns: 1fr; gap: 2.5rem; }
+    .footer-bottom { flex-direction: column; gap: 1.25rem; text-align: center; }
+    
+    .footer-socials {
+        margin-top: 1.5rem;
+    }
+}
+@media (max-width: 480px) {
+    .welcome-heading, .artisans-description { font-size: 1.625rem; }
+    .quote-text { font-size: 1.25rem; }
+    .quote-author { font-size: 0.75rem; margin-top: 1rem; }
+    .quote-section::before { font-size: 5rem; top: -0.75rem; }
+    .gallery { --gscale: 0.62; }
+    .gallery-track { gap: 1.25rem; }
+    .package-price { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#home" class="logo nav-logo">Liebefeld's</a>
+        <ul class="nav-links">
+            <li><a href="#about" class="nav-link">about</a></li>
+            <li><a href="#variants" class="nav-link">variants</a></li>
+            <li><a href="#packages" class="nav-link">packages</a></li>
+            <li><a href="#footer" class="nav-link">contact</a></li>
+            <li><a href="#packages" class="btn btn-nav">PRE-ORDER</a></li>
+        </ul>
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="nav-link">about</a>
+    <a href="#variants" class="nav-link">variants</a>
+    <a href="#packages" class="nav-link">packages</a>
+    <a href="#footer" class="nav-link">contact</a>
+    <a href="#packages" class="btn btn-dark">PRE-ORDER</a>
+    
+    <div class="mobile-socials">
+        <a href="https://wa.me/6282117147214" target="_blank" class="social-icon-btn" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+        </a>
+        <a href="https://www.instagram.com/liebefelds/" target="_blank" class="social-icon-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+        </a>
+    </div>
+</div>
+
+<section class="hero" id="home">
+    <video class="hero-video" autoplay muted loop playsinline poster="product1.jpeg">
+        <source src="mainsection.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        
+        <div class="hero-bottom-left">
+            <div class="hero-zoom-element">
+                <div class="hero-address">
+                    Indonesia's First<br>Authentic Engadin
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-center">
+            <div class="hero-zoom-element">
+                <h1 class="hero-title">Liebefeld's</h1>
+                <p class="hero-subtitle">Authentic Swiss-German taste • Engadin</p>
+                <a href="https://wa.me/6282117147214?text=Hi,%20I%20want%20to%20order." target="_blank" class="hero-cta">
+                    <span>Pre-Order Now</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-bottom-right">
+            <div class="hero-zoom-element">
+                <div class="hero-address">
+                    Weekly fresh made by order.<br>
+                    Cimahi, West Java
+                </div>
+            </div>
+        </div>
+        
+        <a href="#about" class="hero-scroll-indicator hero-zoom-element-scroll" aria-label="Scroll to next section">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+        </a>
+    </div>
+</section>
+
+<main class="page-content">
+    
+    <section class="welcome" id="about">
+        <div class="welcome-image-wrapper pop-in">
+            <img src="product9.png" alt="Liebefeld's Swiss Nusstorte" class="welcome-image">
+        </div>
+        <div class="welcome-text fade-in">
+            <h2 class="welcome-heading" id="animatedHeading">Where the authentic tradition of Swiss Engadiner pastry meets the quiet art of baking, right here in West Java.</h2>
+            <div class="welcome-lower">
+                <div class="welcome-description">
+                    <p>Rooted in the traditions of the Swiss Alps, the Engadiner Nusstorte is a legendary pastry from the Engadin valley of Switzerland. It features a delicate, buttery shortcrust enveloping a rich, unique filling of roasted nuts—walnut, almond, and cashew—bound together by a warm, slow-cooked cinnamon caramel. At Liebefeld's, we bring this authentic heritage to Indonesia, baking strictly by weekly pre-order to ensure every tart is crafted with patience, premium ingredients, and the unhurried devotion that true Swiss pastry demands.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="collections" id="variants">
+        <div class="collections-header fade-in">
+            <h2 class="heading-section">OUR VARIANTS</h2>
+        </div>
+        <div class="variant-selector fade-in">
+            <div class="variant-tabs">
+                <button class="variant-tab active" data-variant="original">Original</button>
+                <button class="variant-tab" data-variant="matcha">Matcha</button>
+                <button class="variant-tab" data-variant="chocolate">Chocolate</button>
+            </div>
+            <div class="variant-image-wrapper pop-in">
+                <img src="original.jpg" alt="Original Nusstorte" class="variant-image" id="variantImage">
+            </div>
+            <div class="variant-info">
+                <div class="variant-tagline" id="variantTagline">CLASSIC ENGADIN RECIPE</div>
+                <h3 class="variant-title" id="variantTitle">Original Nusstorte</h3>
+                <p class="variant-description" id="variantDescription">The timeless Engadiner classic. A delicate, buttery shortcrust pastry enveloping our signature rich, dense filling of slow-caramelized walnuts, almonds, and cashews bound in warm cinnamon caramel. A recipe passed down through generations.</p>
+                <a href="https://wa.me/6282117147214?text=Hi,%20I%20want%20to%20order%20Original%20Nusstorte." target="_blank" class="btn btn-dark" id="variantOrder">PRE-ORDER</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="quote-section fade-in">
+        <p class="quote-text">"The perfect companion to your morning coffee or afternoon tea. A little slice of Swiss tradition, crafted to make every snack time extraordinary."</p>
+    </section>
+
+    <section class="gallery">
+        <div class="gallery-viewport" id="galleryViewport">
+            <div class="gallery-track" id="galleryTrack"></div>
+        </div>
+    </section>
+
+    <section class="packages fade-in" id="packages">
+        <div class="packages-header">
+            <h2>Our Packages</h2>
+            <p>Choose the perfect package for every occasion — from personal indulgence to premium gifting.</p>
+        </div>
+        <div class="packages-grid">
+            <div class="package-card fade-in">
+                <div class="package-name">Per Piece</div>
+                <div class="package-quantity">1 Piece</div>
+                <div class="package-price"><span>Rp</span> 35<span>k</span></div>
+                <div class="package-unit">per piece</div>
+                <p class="package-desc">Perfect for a personal treat. Enjoy a single slice of our authentic Engadiner Nusstorte.</p>
+                <a href="https://wa.me/6282117147214?text=Hi,%20I%20want%20to%20order%201%20piece." target="_blank" class="btn btn-dark">ORDER NOW</a>
+            </div>
+            <div class="package-card popular fade-in">
+                <div class="package-badge">Popular</div>
+                <div class="package-name">Box 4 Pcs</div>
+                <div class="package-quantity">4 Pieces / Box</div>
+                <div class="package-price"><span>Rp</span> 120<span>k</span></div>
+                <div class="package-unit">per box</div>
+                <p class="package-desc">Our best-selling box. Great for sharing with family or colleagues at the office.</p>
+                <a href="https://wa.me/6282117147214?text=Hi,%20I%20want%20to%20order%204%20pcs%20box." target="_blank" class="btn btn-dark">ORDER NOW</a>
+            </div>
+            <div class="package-card fade-in">
+                <div class="package-name">Minis</div>
+                <div class="package-quantity">9 Pieces / Box</div>
+                <div class="package-price"><span>Rp</span> 225<span>k</span></div>
+                <div class="package-unit">per box</div>
+                <p class="package-desc">Mini bite-sized tarts, perfect for events, gatherings, or a dessert table display.</p>
+                <a href="https://wa.me/6282117147214?text=Hi,%20I%20want%20to%20order%209%20pcs%20mini%20box." target="_blank" class="btn btn-dark">ORDER NOW</a>
+            </div>
+            <div class="package-card fade-in">
+                <div class="package-name">Custom Hamper</div>
+                <div class="package-quantity">Bespoke</div>
+                <div class="package-price"><span>Rp</span> 285<span>k+</span></div>
+                <div class="package-unit">starting from</div>
+                <p class="package-desc">Curated gift hampers for special occasions — weddings, corporate gifts, and festive celebrations.</p>
+                <a href="https://wa.me/6282117147214?text=Hi,%20I%20want%20to%20inquire%20about%20custom%20hampers." target="_blank" class="btn btn-dark">INQUIRE</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="artisans" id="artisans">
+        <div class="artisans-header fade-in">
+            <h2 class="artisans-heading"><a href="#artisans">ARTISANS</a></h2>
+            <p class="artisans-description">Based in Indonesia, our dedicated team carries forward the patient craft of traditional nut tart making. Rooted in the Swiss Engadin valley, we ensure every weekly batch meets the highest standard of authenticity.</p>
+        </div>
+        <div class="artisans-photos">
+            <div class="artisans-photo pop-in">
+                <img src="product1.jpeg" alt="Baker preparing dough">
+            </div>
+            <div class="artisans-photo pop-in">
+                <img src="product2.jpeg" alt="Finished Swiss Nusstorte">
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#home" class="logo footer-logo">Liebefeld's</a>
+                    <p class="footer-tagline">Authentic Swiss-German taste from Engadin — weekly fresh-made by pre-order in Cimahi, West Java.</p>
+                    
+                    <div class="footer-socials">
+                        <a href="https://wa.me/6282117147214" target="_blank" class="social-icon-btn" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </a>
+                        <a href="https://www.instagram.com/liebefelds/" target="_blank" class="social-icon-btn" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        </a>
+                    </div>
+                </div>
+                <nav class="footer-nav">
+                    <div>
+                        <h3 class="footer-section-title">Menu</h3>
+                        <ul class="footer-links">
+                            <li><a href="#home" class="footer-link">Home</a></li>
+                            <li><a href="#about" class="footer-link">About</a></li>
+                            <li><a href="#variants" class="footer-link">Variants</a></li>
+                            <li><a href="#packages" class="footer-link">Packages</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="footer-section-title">Contact</h3>
+                        <div class="footer-contact-info">
+                            <p>+62 821-1714-7214</p>
+                            <p><a href="https://wa.me/6282117147214" target="_blank" rel="noopener" class="footer-link">WhatsApp</a></p>
+                            <p><a href="https://www.instagram.com/liebefelds/" target="_blank" rel="noopener" class="footer-link">Instagram</a></p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="footer-section-title">Pre-Order + Hours</h3>
+                        <div class="footer-hours">
+                            <div class="footer-hours-item">
+                                <span>Pre-orders open:</span>
+                                <span>Monday - Wednesday</span>
+                            </div>
+                            <div class="footer-hours-item">
+                                <span>Weekly baking:</span>
+                                <span>Thursday - Friday</span>
+                            </div>
+                            <div class="footer-hours-item">
+                                <span>Fresh delivery/pickup:</span>
+                                <span>Saturday</span>
+                            </div>
+                            <div class="footer-hours-item">
+                                <span>Sunday</span>
+                                <span>Closed</span>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="footer-bottom">
+                <span>© 2026 Liebefeld's · Cimahi, West Java, Indonesia</span>
+                <span class="footer-credit">Crafted with patience, baked by order</span>
+                <a href="#home" class="footer-arrow" id="footerUpBtn" aria-label="Back to top">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="19" x2="12" y2="5"></line>
+                        <polyline points="5 12 12 5 19 12"></polyline>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</main>
+
+<script>
+const nav = document.getElementById('nav');
+const handleScroll = () => {
+    if (window.scrollY > window.innerHeight) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+};
+window.addEventListener('scroll', handleScroll);
+
+const zoomElements = document.querySelectorAll('.hero-zoom-element');
+const zoomScrollElement = document.querySelector('.hero-zoom-element-scroll');
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const fadeThreshold = windowHeight * 0.8;
+            
+            let progress = Math.min(scrollY / fadeThreshold, 1);
+            const opacity = 1 - progress;
+            const scale = 1 - (progress * 0.15);
+            
+            zoomElements.forEach(el => {
+                el.style.opacity = opacity;
+                el.style.transform = `scale(${scale})`;
+            });
+            
+            if (zoomScrollElement) {
+                zoomScrollElement.style.opacity = opacity;
+                zoomScrollElement.style.transform = `translateX(-50%) scale(${scale})`;
+            }
+            
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+mobileMenuBtn.addEventListener('click', () => {
+    const isActive = mobileMenuBtn.classList.toggle('active');
+    mobileMenu.classList.toggle('active', isActive);
+    nav.classList.toggle('menu-open', isActive);
+    document.body.style.overflow = isActive ? 'hidden' : '';
+});
+
+document.querySelectorAll('.mobile-menu .nav-link, .mobile-menu .btn').forEach(link => {
+    link.addEventListener('click', () => {
+        mobileMenuBtn.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        nav.classList.remove('menu-open');
+        document.body.style.overflow = '';
+    });
+});
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#' || targetId.length <= 1) return;
+        
+        if (targetId === '#home') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            return;
+        }
+        
+        const target = document.querySelector(targetId);
+        if (target) {
+            e.preventDefault();
+            const offset = 80;
+            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+    });
+});
+
+const footerUpBtn = document.getElementById('footerUpBtn');
+if (footerUpBtn) {
+    footerUpBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        } else {
+            entry.target.classList.remove('visible');
+        }
+    });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-in, .pop-in').forEach(el => fadeObserver.observe(el));
+
+const animatedTextSelectors = [
+    '#animatedHeading', 
+    '.artisans-description', 
+    '.quote-text', 
+    '.quote-author'
+];
+
+const wordObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        } else {
+            entry.target.classList.remove('visible');
+        }
+    });
+}, { threshold: 0.15, rootMargin: '0px 0px -20% 0px' });
+
+animatedTextSelectors.forEach(selector => {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach((el, elIndex) => {
+        if (el.dataset.wordAnimated) return;
+        el.dataset.wordAnimated = "true";
+        const text = el.textContent.trim();
+        if (!text) return;
+        const words = text.split(' ');
+        
+        el.innerHTML = words.map((word, i) => {
+            const delayIn = (elIndex * 0.1) + (i * 0.03) + 's';
+            const delayOut = (elIndex * 0.1) + ((words.length - 1 - i) * 0.03) + 's';
+            return `<span class="word-anim" style="--delay-in: ${delayIn}; --delay-out: ${delayOut}">${word}</span>`;
+        }).join(' ');
+        
+        el.querySelectorAll('.word-anim').forEach(span => wordObserver.observe(span));
+    });
+});
+
+window.addEventListener('load', () => {
+    document.querySelectorAll('.fade-in, .pop-in, .word-anim').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            el.classList.add('visible');
+        }
+    });
+});
+
+// FIXED: Active nav link detection using getBoundingClientRect for accuracy
+const navTargets = document.querySelectorAll('#about, #variants, #packages, #footer');
+const navLinks = document.querySelectorAll('.nav-links .nav-link');
+
+function updateActiveLink() {
+    let current = '';
+    const checkY = 200; // Check point 200px from top of viewport
+    
+    navTargets.forEach(section => {
+        if (!section) return;
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= checkY && rect.bottom >= checkY) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    // No active link when still in hero section
+    if (window.scrollY < window.innerHeight * 0.8) {
+        current = '';
+    }
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (current && link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', updateActiveLink);
+window.addEventListener('resize', updateActiveLink);
+updateActiveLink();
+
+const variantData = {
+    original: {
+        title: 'Original Nusstorte',
+        tagline: 'CLASSIC ENGADIN RECIPE',
+        description: 'The timeless Engadiner classic. A delicate, buttery shortcrust pastry enveloping our signature rich, dense filling of slow-caramelized walnuts, almonds, and cashews bound in warm cinnamon caramel. A recipe passed down through generations.',
+        image: 'original.jpg',
+        link: 'https://wa.me/6282117147214?text=Hi,%20I%20want%20to%20order%20Original%20Nusstorte.'
+    },
+    matcha: {
+        title: 'Matcha Nusstorte',
+        tagline: 'SWISS-JAPANESE FUSION',
+        description: 'A thoughtful fusion of Swiss heritage and Japanese craft. A vibrant, matcha-infused shortcrust pastry envelops our signature rich, slow-caramelized nut filling, adding a subtle earthy depth and striking color to every bite.',
+        image: 'matcha.jpg',
+        link: 'https://wa.me/6282117147214?text=Hi,%20I%20want%20to%20order%20Matcha%20Nusstorte.'
+    },
+    chocolate: {
+        title: 'Chocolate Nusstorte',
+        tagline: 'RICH COCOA BLEND',
+        description: 'For those who crave deeper notes. A rich, dark cocoa-infused shortcrust pastry envelops our traditional, slow-caramelized nut filling, creating a deeply indulgent take on the classic Engadiner without losing its signature texture.',
+        image: 'chocolate.jpg',
+        link: 'https://wa.me/6282117147214?text=Hi,%20I%20want%20to%20order%20Chocolate%20Nusstorte.'
+    }
+};
+
+const variantImage = document.getElementById('variantImage');
+const variantTitle = document.getElementById('variantTitle');
+const variantTagline = document.getElementById('variantTagline');
+const variantDescription = document.getElementById('variantDescription');
+const variantOrder = document.getElementById('variantOrder');
+const variantTabs = document.querySelectorAll('.variant-tab');
+
+variantTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        const variant = tab.dataset.variant;
+        const data = variantData[variant];
+        if (!data) return;
+
+        variantTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        variantImage.classList.add('fade-out');
+
+        setTimeout(() => {
+            variantImage.src = data.image;
+            variantImage.alt = data.title;
+            variantTitle.textContent = data.title;
+            variantTagline.textContent = data.tagline;
+            variantDescription.textContent = data.description;
+            variantOrder.href = data.link;
+            variantImage.classList.remove('fade-out');
+        }, 300);
+    });
+});
+
+const galleryTrack = document.getElementById('galleryTrack');
+const galleryViewport = document.getElementById('galleryViewport');
+
+const G_IMG = {
+    a: 'product1.jpeg',
+    b: 'product2.jpeg',
+    c: 'product3.jpg',
+    d: 'product4.jpg',
+    e: 'product5.png',
+    f: 'product6.png',
+    g: 'product7.png',
+    h: 'product8.png',
+    i: 'product9.png',
+    j: 'original.jpg',
+    k: 'chocolate.jpg',
+    l: 'matcha.jpg'
+};
+
+const galleryColumns = [
+    { items: [
+        { tier: 'top',    size: 'size-a', src: G_IMG.a, alt: 'Liebefeld\'s Signature Tart' },
+        { tier: 'bottom', size: 'size-b', src: G_IMG.b, alt: 'Freshly baked goods' }
+    ]},
+    { items: [
+        { tier: 'middle', size: 'size-c', src: G_IMG.c, alt: 'Artisan pastry preparation' }
+    ]},
+    { items: [
+        { tier: 'top',    size: 'size-d', src: G_IMG.j, alt: 'Original Nusstorte' },
+        { tier: 'bottom', size: 'size-e', src: G_IMG.l, alt: 'Matcha Nusstorte' }
+    ]},
+    { items: [
+        { tier: 'middle', size: 'size-f', src: G_IMG.k, alt: 'Chocolate Nusstorte' }
+    ]},
+    { items: [
+        { tier: 'top',    size: 'size-g', src: G_IMG.d, alt: 'Swiss pastry details' }
+    ]},
+    { items: [
+        { tier: 'bottom', size: 'size-h', src: G_IMG.e, alt: 'Caramelized nut filling' }
+    ]},
+    { items: [
+        { tier: 'middle', size: 'size-c', src: G_IMG.f, alt: 'Baker at work' }
+    ]},
+    { items: [
+        { tier: 'top',    size: 'size-a', src: G_IMG.g, alt: 'Traditional baking tools' }
+    ]},
+    { items: [
+        { tier: 'bottom', size: 'size-b', src: G_IMG.h, alt: 'Finished pastry box' }
+    ]},
+    { items: [
+        { tier: 'middle', size: 'size-c', src: G_IMG.i, alt: 'Artisan team' }
+    ]}
+];
+
+function createGalleryCard(item) {
+    const card = document.createElement('div');
+    card.className = `gallery-item ${item.size}`;
+    card.innerHTML = `<img src="${item.src}" alt="${item.alt}" loading="lazy">`;
+    return card;
+}
+
+function createGalleryColumn(col) {
+    const colDiv = document.createElement('div');
+    colDiv.className = 'gallery-column';
+    ['top', 'middle', 'bottom'].forEach(tier => {
+        const slot = document.createElement('div');
+        slot.className = `gallery-slot ${tier}`;
+        const item = col.items.find(i => i.tier === tier);
+        if (item) slot.appendChild(createGalleryCard(item));
+        colDiv.appendChild(slot);
+    });
+    return colDiv;
+}
+
+function buildGalleryTrack() {
+    galleryTrack.innerHTML = '';
+    for (let i = 0; i < 2; i++) {
+        galleryColumns.forEach(col => galleryTrack.appendChild(createGalleryColumn(col)));
+    }
+}
+buildGalleryTrack();
+
+let gScrollPos = 0;
+const gBaseSpeed = 1;
+let gIsDragging = false;
+let gStartX = 0;
+let gDragStartScroll = 0;
+let gHalfWidth = 0;
+
+function updateGalleryBounds() {
+    const cols = galleryTrack.children;
+    if (cols.length > galleryColumns.length) {
+        gHalfWidth = cols[galleryColumns.length].offsetLeft - cols[0].offsetLeft;
+    }
+}
+window.addEventListener('resize', updateGalleryBounds);
+window.addEventListener('load', updateGalleryBounds);
+updateGalleryBounds();
+
+function animateGallery() {
+    if (!gIsDragging) {
+        gScrollPos += gBaseSpeed;
+    }
+    if (gHalfWidth > 0) {
+        if (gScrollPos >= gHalfWidth) {
+            gScrollPos -= gHalfWidth;
+        } else if (gScrollPos < 0) {
+            gScrollPos += gHalfWidth;
+        }
+    }
+    galleryTrack.style.transform = `translate3d(${-gScrollPos}px, 0, 0)`;
+    requestAnimationFrame(animateGallery);
+}
+requestAnimationFrame(animateGallery);
+
+galleryViewport.addEventListener('pointerdown', (e) => {
+    gIsDragging = true;
+    gStartX = e.clientX;
+    gDragStartScroll = gScrollPos;
+    galleryViewport.classList.add('dragging');
+    galleryViewport.setPointerCapture(e.pointerId);
+});
+galleryViewport.addEventListener('pointermove', (e) => {
+    if (!gIsDragging) return;
+    const walk = (gStartX - e.clientX) * 1.2;
+    gScrollPos = gDragStartScroll + walk;
+});
+['pointerup', 'pointercancel'].forEach(ev => {
+    galleryViewport.addEventListener(ev, () => {
+        gIsDragging = false;
+        galleryViewport.classList.remove('dragging');
+    });
+});
+
+const preloadImages = [
+    'product1.jpeg',
+    'product9.png',
+    'original.jpg',
+    'matcha.jpg',
+    'chocolate.jpg'
+];
+preloadImages.forEach(src => { const img = new Image(); img.src = src; });
+
+console.log('%c🥐 Liebefeld\'s', 'font-size: 28px; font-family: cursive; font-weight: bold; color: #b8935a;');
+console.log('%cAuthentic Swiss-German Taste · Engadin · Weekly fresh made by order in Cimahi, West Java', 'font-size: 14px; color: #5c4a3a;');
+</script>
+</body>
+</html>
